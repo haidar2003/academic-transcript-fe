@@ -63,24 +63,20 @@ function TablePage() {
           <th className="column">NIM</th>
           <th className="column">Nama</th>
           {Array.from({ length: 10 }, (_, i) => (
+            <>
             <th key={`subject-${i + 1}`} className="column">
               {`Kode Mata Kuliah ${i + 1}`}
             </th>
-          ))}
-          {Array.from({ length: 10 }, (_, i) => (
             <th key={`subject-${i + 1}-name`} className="column">
-              {`Nama Mata Kuliah ${i + 1}`}
-            </th>
-          ))}
-          {Array.from({ length: 10 }, (_, i) => (
-            <th key={`subject-${i + 1}-grade`} className="column">
+            {`Nama Mata Kuliah ${i + 1}`}
+           </th>
+           <th key={`subject-${i + 1}-grade`} className="column">
               Nilai Mata Kuliah {i + 1}
             </th>
-          ))}
-          {Array.from({ length: 10 }, (_, i) => (
             <th key={`subject-${i + 1}-sks`} className="column">
               SKS Mata Kuliah {i + 1}
             </th>
+           </>
           ))}
           <th className="column">IPK</th>
           <th className="column">Tanda Tangan</th>
