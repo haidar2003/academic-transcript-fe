@@ -6,8 +6,8 @@ th {
 }
 
 .transcript-table {
-    width: 100%; /* Make table fill available width */
-    border-collapse: collapse; /* Remove borders between cells */
+    width: 100%; 
+    border-collapse: collapse; 
   }
   
   .column {
