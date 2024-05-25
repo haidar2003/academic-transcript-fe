@@ -17,31 +17,20 @@ function PDFPage(){
       }
   
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("request", file);
   
       fetch("https://academic-trascript.azurewebsites.net/pdf/decrypted", {
         method: 'POST',
-        body: formData, headers: { 'Content-Type': 'application/json' }
+        body: formData // , headers:  { 'Content-Type': 'multipart/form-data' }
+      }).then((response) => {
+        return  response.blob();
+      }).then(blob => {
+        saveAs(blob, "Decrypted.pdf")
       })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error("Failed to upload file");
-          }
-          return response.blob();
-        })
-        .then(blob => {
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.setAttribute('download', 'file_decrypted.pdf');
-          document.body.appendChild(link);
-          link.click();
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
     };
-    return (<button onClick={handeDownloadPDF()}>Unduh PDF</button>)
+    return ( <div> 
+      <input type="file" onChange={ (event) => handleFileChange(event)} />
+      <button onClick={ () =>( handleDecryptPDF())}>Unduh PDF</button> </div>)
 }
 
 export default PDFPage
