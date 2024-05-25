@@ -43,7 +43,7 @@
 
 .page-container {
   flex: 1; 
-  padding: calc(80px + 1rem);
+  padding: calc(100px + 1rem);
 }
 
 .footer {
