@@ -10,7 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "clipboard-copy": "^4.0.1",
+    "file-saver": "^2.0.5",
+    "js-file-download": "^0.4.12",
+    "js-file-downloader": "^1.1.25",
     "react": "^18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-split": "^2.0.14"
   },

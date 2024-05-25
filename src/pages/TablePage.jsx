@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './TablePage.css';
+import { saveAs } from 'file-saver';
 
 function TablePage() {
     const [transcripts, setTranscripts] = useState([]);
@@ -28,6 +29,18 @@ function TablePage() {
       setSelectedEndpoint(newEndpoint);
     };
   
+    const handeDownloadPDF = (nim) => {
+      const response = fetch("https://academic-trascript.azurewebsites.net/pdf/encrypted" , {
+        method : "POST",
+        headers : { 'Content-Type': 'application/json' },
+        body : JSON.stringify({nim : nim})
+      }).then((response) => {
+        return  response.blob();
+      }).then(blob => {
+        saveAs(blob, "Output")
+      })
+
+    }
     return (
     <div>
         <div className="button-container">
@@ -44,6 +57,8 @@ function TablePage() {
     <table className="transcript-table">
       <thead>
         <tr>
+          <th className="column">Unduh PDF</th>
+          <th className="column">Salin Tanda Tangan</th>
           <th className="column">NIM</th>
           <th className="column">Nama</th>
           {Array.from({ length: 10 }, (_, i) => (
@@ -73,6 +88,7 @@ function TablePage() {
       <tbody>
         {transcripts.map((transcript) => (
           <tr key={transcript.id}>
+            <td className="column"> <button onClick={ () => (handeDownloadPDF(transcript.transcript.id))}>Unduh PDF</button></td>
             <td className="column">{transcript.transcript.id}</td>
             <td className="column">{transcript.transcript.name}</td>
             {transcript.transcript.subject_list.map((subject) => (
