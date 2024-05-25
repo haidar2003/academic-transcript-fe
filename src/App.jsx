@@ -13,6 +13,7 @@ function App() {
    <div className="app">
      <header className="header">
        <nav className="nav">
+        <div>
          <button
            className="nav-button"
            onClick={() => setPage('InputPage')}
@@ -43,6 +44,8 @@ function App() {
          >
            PDF Page
          </button>
+         </div>
+         <p className='nav-profile'>Made by 🦊 Muhammad Rafi Haidar (18221134) and 🍗 Raditya Azka Prabaswara (18221152)</p>
        </nav>
      </header>
      <div className="page-container">

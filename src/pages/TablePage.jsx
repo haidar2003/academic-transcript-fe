@@ -5,8 +5,9 @@ import { saveAs } from 'file-saver';
 function TablePage() {
     const [transcripts, setTranscripts] = useState([]);
     const [selectedEndpoint, setSelectedEndpoint] = useState(
-      'https://academic-trascript.azurewebsites.net/transcript/encrypted/all'
+      'https://academic-trascript.azurewebsites.net/transcript'
     );
+    const [showDownload, setShowDownload] = useState(true);
   
     useEffect(() => {
       const fetchData = async () => {
@@ -25,8 +26,9 @@ function TablePage() {
       fetchData();
     }, [selectedEndpoint]); 
   
-    const handleEndpointChange = (newEndpoint) => {
+    const handleEndpointChange = (newEndpoint, isDownloadable) => {
       setSelectedEndpoint(newEndpoint);
+      setShowDownload(isDownloadable)
     };
   
     const handeDownloadPDF = (nim) => {
@@ -44,21 +46,20 @@ function TablePage() {
     return (
     <div>
         <div className="button-container">
-          <button onClick={() => handleEndpointChange('https://academic-trascript.azurewebsites.net/transcript')}>
-            Standard
+          <button onClick={() => handleEndpointChange('https://academic-trascript.azurewebsites.net/transcript', true)}>
+            Tidak Dienkripsi
           </button>
-          <button onClick={() => handleEndpointChange('https://academic-trascript.azurewebsites.net/transcript/encrypted')}>
-            Encrypt Partially
+          <button onClick={() => handleEndpointChange('https://academic-trascript.azurewebsites.net/transcript/encrypted', false)}>
+            Enkripsi Semua Kecuali Tanda Tangan
           </button>
-          <button onClick={() => handleEndpointChange('https://academic-trascript.azurewebsites.net/transcript/encrypted/all')}>
-            Encrypt All
+          <button onClick={() => handleEndpointChange('https://academic-trascript.azurewebsites.net/transcript/encrypted/all', false)}>
+            Enkripsi Semua
           </button>
         </div>
     <table className="transcript-table">
       <thead>
         <tr>
           <th className="column">Unduh PDF</th>
-          <th className="column">Salin Tanda Tangan</th>
           <th className="column">NIM</th>
           <th className="column">Nama</th>
           {Array.from({ length: 10 }, (_, i) => (
@@ -88,7 +89,10 @@ function TablePage() {
       <tbody>
         {transcripts.map((transcript) => (
           <tr key={transcript.id}>
-            <td className="column"> <button onClick={ () => (handeDownloadPDF(transcript.transcript.id))}>Unduh PDF</button></td>
+            {showDownload ? 
+              <td className="column"> <button onClick={ () => (handeDownloadPDF(transcript.transcript.id))}>Unduh PDF</button></td> : 
+              <td className="column"><p style={{fontWeight: "bold"}}>Ubah Ke mode 'Tidak Dienkripsi'</p></td>
+            }
             <td className="column">{transcript.transcript.id}</td>
             <td className="column">{transcript.transcript.name}</td>
             {transcript.transcript.subject_list.map((subject) => (
