@@ -7,7 +7,7 @@ function InputPage() {
     kodeMataKuliah: '',
     namaMataKuliah: '',
     nilaiMataKuliah: 'A',
-    sksMataKuliah: '0'
+    sksMataKuliah: '1'
   });
 
   const [student, setStudent] = useState(
@@ -127,6 +127,16 @@ function InputPage() {
         <div className="transcript-form-container">
             <div className="student-form-container">
                 <div>
+                    <label htmlFor='NIMMahasiswa'>NIM:</label>
+                    <input
+                    type="text"
+                    id='NIMMahasiswa'
+                    name="NIMMahasiswa"
+                    value={student.NIMMahasiswa}
+                    onChange={handleChangeStudent}
+                    /> 
+                </div>
+                <div>
                     <label htmlFor='namaMahasiswa'>Nama:</label>
                     <input
                     type="text"
@@ -137,14 +147,7 @@ function InputPage() {
                     /> 
                 </div>
                 <div>
-                    <label htmlFor='NIMMahasiswa'>NIM:</label>
-                    <input
-                    type="text"
-                    id='NIMMahasiswa'
-                    name="NIMMahasiswa"
-                    value={student.NIMMahasiswa}
-                    onChange={handleChangeStudent}
-                    /> 
+                  <button type="submit">Submit</button>
                 </div>
             </div>
         
@@ -194,15 +197,13 @@ function InputPage() {
                   name="sksMataKuliah"
                   value={subject.sksMataKuliah}
                   onChange={(e) => handleChangeSubject(index, e)}
-                  min={0}
+                  min={1}
                 />
               </div>
             </div>
           </div>
           ))}
-        <br/>
         </div>
-        <button type="submit">Submit</button>
       </form>
   );
 };
